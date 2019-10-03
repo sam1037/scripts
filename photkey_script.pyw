@@ -14,8 +14,7 @@ run_hotkey = False
 
 def test():
     print("test")
-    print("test again")
-    print('is there an git update????????????????')
+
 
 current_keys = set()
 
