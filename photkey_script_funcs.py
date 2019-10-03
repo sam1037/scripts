@@ -83,7 +83,9 @@ def open_chrome():
 
 
 def open_pycharm():
-    open_app("pycharm64.exe", "Pycharm", ("C:\Program Files\JetBrains\PyCharm Community Edition 2019.2.1\\bin\pycharm64.exe"))
+    open_app("pycharm64.exe", "Pycharm",
+             "C:\Program Files\JetBrains\PyCharm Community Edition 2019.2.1\\bin\pycharm64.exe")
+    # use \\ because \b does some nasty stuff
 
 
 def delete_key_once():
@@ -103,7 +105,6 @@ def select_and_search():
     pg.hotkey("ctrl", 't')
     pg.hotkey('ctrl','v')
     pg.hotkey('enter')
-
 
 
 def open_lol():

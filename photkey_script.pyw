@@ -44,10 +44,6 @@ def on_release(key):
 
 def main():
 
-    #minimaze cmd
-
-    from pynput import mouse
-
     def on_click(x, y, button, pressed):
         global run_hotkey
         if pressed:
