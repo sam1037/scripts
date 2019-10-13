@@ -22,6 +22,7 @@ hotkeys_to_funcs = {  # list of hotkey and its particular function
     frozenset([KeyCode(char="`"), KeyCode(char="p")]): [delete_key_twice, open_pycharm],
     frozenset([KeyCode(char="`"), KeyCode(char="g")]): [select_and_search],
     frozenset([KeyCode(char="`"), KeyCode(char="l")]): [delete_key_twice, open_lol],
+    frozenset([KeyCode(char="`"), KeyCode(char="a")]): [delete_key_twice, open_anki]
 
     # todo create more hotkeys:
 }

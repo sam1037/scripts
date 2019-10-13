@@ -43,7 +43,6 @@ def open_app(app_exe_file, app_name, app_path):
             return mlst"""
 
         # switch app
-
         def windowEnumerationHandler(hwnd, top_windows):
             top_windows.append((hwnd, win32gui.GetWindowText(hwnd)))
 
@@ -55,6 +54,7 @@ def open_app(app_exe_file, app_name, app_path):
                 try:
                     win32gui.ShowWindow(i[0], 5)
                     win32gui.SetForegroundWindow(i[0])
+                    maximaze_current_window()
                     break
                 except Exception as e:
                     print(e)
@@ -109,3 +109,19 @@ def select_and_search():
 
 def open_lol():
     open_app('Garena', 'Garena', "C:\Program Files (x86)\Garena\Garena\Garena.exe")
+
+
+
+def get_mouse_coords():
+    import win32api
+    while True:
+        time.sleep(0.1)
+        x, y = win32api.GetCursorPos()
+        print(x,y)
+
+
+def open_anki():
+    open_app("anki.exe", 'anki', "C:\Program Files\Anki\\anki.exe")
+
+
+
