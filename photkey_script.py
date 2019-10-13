@@ -41,15 +41,6 @@ def on_release(key):
 
 
 def main():
-
-    #def on_click(x, y, button, pressed):
-     #   global run_hotkey
-      #  if pressed:
-       #     if button == mouse.Button.middle:
-        #        run_hotkey = True
-        #else:
-         #   run_hotkey = False
-
     with keyboard.Listener(on_press=on_press, on_release=on_release) as kl:
         kl.join()
 
