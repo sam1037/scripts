@@ -8,7 +8,7 @@ from photkey_script_funcs import *
 current_keys = set()
 
 
-hotkeys_to_funcs={frozenset([KeyCode(char='b')]): [delete_key_once, bookmark_process]
+hotkeys_to_funcs={frozenset([KeyCode(char='`'), KeyCode(char='b')]): [delete_key_twice, bookmark_process]
                   }
 
 
@@ -29,7 +29,7 @@ def main():
         kl.join()
 
 
-while True:
+while True:  # if chrome is opened, activate the script
     if __name__ == "__main__":
         if "chrome.exe" in (p.name() for p in psutil.process_iter()):
             print('main loop')
