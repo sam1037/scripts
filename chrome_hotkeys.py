@@ -24,14 +24,17 @@ def on_release(key):
     current_keys.clear()
 
 
-def main():
+def listen():
     with keyboard.Listener(on_press=on_press, on_release=on_release) as kl:
         kl.join()
 
-
-while True:  # if chrome is opened, activate the script
-    if __name__ == "__main__":
+def main():
+    while True:  # if chrome is opened, activate the script
         if "chrome.exe" in (p.name() for p in psutil.process_iter()):
             print('main loop')
-            main()
+            listen()
             break
+
+
+if __name__ == '__main__':
+    main()

@@ -8,7 +8,7 @@ def choose_bookmark(num):
         return
     global bookmarks
     # todo update bookmarks automatical constantly
-    bookmarks = {1: 'https://www.youtube.com/',
+    bookmarks = {1: 'hello',
                  2: 'https://www.netflix.com/browse',
                  3: 'https://github.com/',
                  4: 'https://www.ticktick.com/#q/all/tasks',
@@ -51,6 +51,3 @@ def bookmark_process():  # take a number and open certain bookmark
             on_release=on_release) as bookmark_listener:
         bookmark_listener.join()
 
-    # if type(num) != int:  # if key input isn't int, end
-    #   pass
-    # else:

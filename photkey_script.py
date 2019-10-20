@@ -8,6 +8,7 @@ Testing testing
 from pynput import keyboard, mouse
 from pynput.keyboard import Key, KeyCode
 from photkey_script_funcs import *
+import chrome_hotkeys
 
 
 def test():
@@ -47,3 +48,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+    # todo add chrome hotkey script to here and run them simultaneously

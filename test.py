@@ -1,24 +1,46 @@
-"""def main():
+def main():
     from pynput import mouse
-
-    def listen_hotkey():
-        print("listening")
 
     def on_click(x, y, button, pressed):
         if pressed:
-            if button == mouse.Button.middle:
-                listen_hotkey()
+            print(x,y)
 
     with mouse.Listener(on_click=on_click) as l:
-        l.join()"""
+        l.join()
+
+
+#main()
+
+
+"""
 import pyautogui as pg
+import time
 
-bookmarks = {1: 'https://www.youtube.com/',
-             2: 'https://www.netflix.com/browse',
-             3: 'https://github.com/',
-             4: 'https://www.ticktick.com/#q/all/tasks',
-             5: 'https://www.evernote.com/client/web?login=true#?an=true&n=23508630-e7c2-4132-98ac-43b8e246c2e0&s'
-                '=s570&',
-             6: 'https://stackoverflow.com/'}
+pg.hotkey('winleft')
 
-pg.typewrite('{0}\n'.format(bookmarks[1]))
+pg.typewrite('chrome\n', 0.1)
+
+time.sleep(1)
+
+pg.typewrite('www.youtube.com\n')
+
+pg.hotkey('winleft', 'up')
+"""
+
+
+def bk(num):
+    import pyautogui as pg
+    import pynput
+
+    pg.hotkey('winleft')
+
+    pg.typewrite('chrome\n', 0.1)
+
+    pg.hotkey('winleft', 'up')
+
+    pg.click(1901, 53, button='left')
+
+    pg.click(1840,211, button='left')
+
+
+bk(1)
