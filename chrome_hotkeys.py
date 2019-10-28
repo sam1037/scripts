@@ -4,12 +4,16 @@ from pynput import keyboard
 from pynput.keyboard import Key, KeyCode
 from chrome_hotkeys_funcs import *
 from photkey_script_funcs import *
+import ctypes
+
+
+ctypes.windll.kernel32.SetConsoleTitleW("Chrome_hotkey")  # change cmd name
 
 current_keys = set()
 
 
 hotkeys_to_funcs={frozenset([KeyCode(char='`'), KeyCode(char='b')]): [delete_key_twice, bookmark_process],
-                  frozenset([Key.tab, Key.left]): [change_web_tab_to_left],  # todo fix not able to use it continuously
+                  frozenset([Key.tab, Key.left]): [change_web_tab_to_left],  # ````todo fix not able to use it continuously
                   frozenset([Key.tab, Key.right]): [change_web_tab_to_right],
                   }
 
@@ -39,7 +43,9 @@ def main():
         if "chrome.exe" in (p.name() for p in psutil.process_iter()):
             print('main loop')
             listen()
-            break
+            #break
+        else:
+            time.sleep(1)
 
 
 if __name__ == '__main__':

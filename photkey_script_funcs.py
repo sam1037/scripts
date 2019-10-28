@@ -8,6 +8,7 @@ import pyautogui as pg
 import win32con
 import win32gui
 import os
+import time
 
 
 def maximaze_current_window():
@@ -24,14 +25,15 @@ def delete_key(times):
 
 
 def open_app(app_exe_file, app_name, app_path):
+    s_time = time.time()
 
     # if app already exist, bring app to foreground
 
     # check if app exist
-    for p in psutil.process_iter():
-        print(p.name())
-    print('------------------------')
 
+    #for p in psutil.process_iter():
+     #   print(p.name())
+    #print('------------------------')
 
     if app_exe_file in (p.name() for p in psutil.process_iter()):
 
@@ -64,6 +66,9 @@ def open_app(app_exe_file, app_name, app_path):
         except Exception as error_msg:
             print(error_msg)
 
+    time_used = round((time.time() - s_time), 5)
+    print('Used {0} second to finished process'.format(time_used))
+
 
 def close_current_window():
     handle = (win32gui.GetForegroundWindow())  # handle is the process of current window
@@ -71,13 +76,14 @@ def close_current_window():
 
 
 def open_chrome():
-    open_app("chrome.exe", "Google Chrome", "C:\Program Files (x86)\Google\Chrome\Application\chrome.exe")
-
+    #open_app("chrome.exe", "Google Chrome", "C:\Program Files (x86)\Google\Chrome\Application\chrome.exe")
+    open_bar_app(3)
 
 def open_pycharm():
-    open_app("pycharm64.exe", "Pycharm",
-             "C:\Program Files\JetBrains\PyCharm Community Edition 2019.2.1\\bin\pycharm64.exe")
+    #open_app("pycharm64.exe", "Pycharm",
+    #         "C:\Program Files\JetBrains\PyCharm Community Edition 2019.2.1\\bin\pycharm64.exe")
     # use \\ because \b does some nasty stuff
+    open_bar_app(5)
 
 
 def delete_key_once():
@@ -100,8 +106,8 @@ def select_and_search():
 
 
 def open_lol():
-    open_app('Garena', 'Garena', "C:\Program Files (x86)\Garena\Garena\Garena.exe")
-
+    #open_app('Garena', 'Garena', "C:\Program Files (x86)\Garena\Garena\Garena.exe")
+    open_bar_app(9)
 
 
 def get_mouse_coords():
@@ -113,7 +119,20 @@ def get_mouse_coords():
 
 
 def open_anki():
-    open_app("anki.exe", 'anki', "C:\Program Files\Anki\\anki.exe")
+    #open_app("anki.exe", 'anki', "C:\Program Files\Anki\\anki.exe")
+    open_bar_app(8)
 
+def open_bar_app(num, multipage = False):
+    s_time = time.time()
 
+    # todo if current app is the app, don't switch
+    pg.hotkey('esc')
+    x,y = pg.position()
+    pg.click(420+(num-1)*47, 1070)
+    if multipage:  # if there are more than one app of its self
+        time.sleep(0.02)
+        pg.click(420+(num-1)*47, 1020)
+    pg.moveTo(x,y)
 
+    time_used = round((time.time()- s_time), 5)
+    print('-'*40,"\nUsed {0} second to finish process".format(time_used))
