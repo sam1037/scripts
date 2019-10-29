@@ -12,29 +12,30 @@ def choose_bookmark(num):  # todo fix not working in not full screen
     pg.click(1460, 345 + (num - 1) * 22, button='left')
 
 def bookmark_process():  # take a number and open certain bookmark
-    time.sleep(0.1)
     print('-----------------------------------')
     print('processing')
     print("listening for keystroke")
 
+    current_keys = []
+    press_num = 0
+
     # listen for once if key input is int
     def on_press(key):
-        pass
+        try:
+            current_keys.append(int(key.char))
+        except Exception as e:
+            print(e)
+            print('end')
+            return False
 
     def on_release(key):
         try:
-            key = int(key.char)
-            print('on release')
-
-        except ValueError as err:
-            print("Expected int input, but didn't get one")
-
-        else:
-            choose_bookmark(num=key)
-
-        finally:
-            print('End with key {0} pressed\n-----------------------------------'.format(key))
-            return False  # end listening, end process
+            print(len(current_keys), current_keys)
+            choose_bookmark(num=current_keys[0])
+            print('end')
+            return False
+        except Exception as e:
+            print(e)
 
     with Listener(
             on_press=on_press,
@@ -51,3 +52,10 @@ def change_web_tab_to_right():
     print('change web tab to right')
     pg.hotkey('ctrl', 'tab')
 
+
+def close_all_but_one_new_tab():
+    pg.click(40,10, button='right')
+    pg.click(135,190)
+    pg.hotkey('ctrl','t')
+    pg.hotkey('ctrl', 'shift', 'tab')
+    pg.hotkey('ctrl', 'w')

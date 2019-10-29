@@ -136,3 +136,4 @@ def open_bar_app(num, multipage = False):
 
     time_used = round((time.time()- s_time), 5)
     print('-'*40,"\nUsed {0} second to finish process".format(time_used))
+

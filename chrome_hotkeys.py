@@ -12,9 +12,10 @@ ctypes.windll.kernel32.SetConsoleTitleW("Chrome_hotkey")  # change cmd name
 current_keys = set()
 
 
-hotkeys_to_funcs={frozenset([KeyCode(char='`'), KeyCode(char='b')]): [delete_key_twice, bookmark_process],
-                  frozenset([Key.tab, Key.left]): [change_web_tab_to_left],  # ````todo fix not able to use it continuously
+hotkeys_to_funcs={frozenset([KeyCode(char='`'), KeyCode(char='b')]): [bookmark_process],
+                  frozenset([Key.tab, Key.left]): [change_web_tab_to_left],  # todo fix not able to use it continuously
                   frozenset([Key.tab, Key.right]): [change_web_tab_to_right],
+                  frozenset([KeyCode(char='`'), Key.delete]): [close_all_but_one_new_tab]
                   }
 
 
