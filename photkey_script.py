@@ -19,26 +19,26 @@ def test():
 current_keys = set()
 
 hotkeys_to_funcs = {  # list of hotkey and its particular function
-    frozenset([KeyCode(char="`"), KeyCode(char="c")]): [delete_key_twice, open_chrome],
-    frozenset([KeyCode(char="`"), KeyCode(char="x")]): [delete_key_twice, close_current_window],
-    frozenset([KeyCode(char="`"), KeyCode(char="p")]): [delete_key_twice, open_pycharm],
+    frozenset([KeyCode(char="`"), KeyCode(char="c")]): [delete_key_once, open_chrome],
+    frozenset([KeyCode(char="`"), KeyCode(char="x")]): [delete_key_once, close_current_window],
+    frozenset([KeyCode(char="`"), KeyCode(char="p")]): [delete_key_once, open_pycharm],
     frozenset([KeyCode(char="`"), KeyCode(char="g")]): [select_and_search],
-    frozenset([KeyCode(char="`"), KeyCode(char="l")]): [delete_key_twice, open_lol],
-    frozenset([KeyCode(char="`"), KeyCode(char="a")]): [delete_key_twice, open_anki]
-
+    frozenset([KeyCode(char="`"), KeyCode(char="l")]): [delete_key_once, open_lol],
+    frozenset([KeyCode(char="`"), KeyCode(char="a")]): [delete_key_once, open_anki]
     # todo create more hotkeys:
 }
+
 
 
 def on_press(key):
     current_keys.add(key)  # add current key for checking
     #print(current_keys)
-    if frozenset(current_keys) in hotkeys_to_funcs:  # if curtain hotkey is pressed
-        for func in hotkeys_to_funcs[frozenset(current_keys)]:  # execute functions
-            func()
 
 
 def on_release(key):
+    if frozenset(current_keys) in hotkeys_to_funcs:  # if curtain hotkey is pressed
+        for func in hotkeys_to_funcs[frozenset(current_keys)]:  # execute functions
+            func()
     current_keys.clear()
 
 

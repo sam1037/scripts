@@ -29,13 +29,7 @@ def open_app(app_exe_file, app_name, app_path):
 
     # if app already exist, bring app to foreground
 
-    # check if app exist
-
-    #for p in psutil.process_iter():
-     #   print(p.name())
-    #print('------------------------')
-
-    if app_exe_file in (p.name() for p in psutil.process_iter()):
+    if app_exe_file in (p.name() for p in psutil.process_iter()):  # check if app exist
 
         import win32gui
 
@@ -76,13 +70,32 @@ def close_current_window():
 
 
 def open_chrome():
-    #open_app("chrome.exe", "Google Chrome", "C:\Program Files (x86)\Google\Chrome\Application\chrome.exe")
-    open_bar_app(3)
+
+    def launch_chrome():
+        try:
+            from selenium import webdriver
+            options = webdriver.ChromeOptions()
+            user_data_dir = 'user-data-dir=C:\\Users\\manyi\\AppData\\Local\\Google\\Chrome\\User Data'
+            options.add_argument(user_data_dir)
+            driver = webdriver.Chrome(executable_path='D:\文件\chromedriver_win32\chromedriver.exe', options=options)
+
+        except Exception as e:
+            pass
+        finally:
+            global chrome_opened
+            chrome_opened = True
+
+    try:
+        if chrome_opened:
+            open_bar_app(3)  # switch to chrome
+    except Exception as e:
+        print(e)
+        launch_chrome()  # open chrome if chrome isn't opened
+
+
+
 
 def open_pycharm():
-    #open_app("pycharm64.exe", "Pycharm",
-    #         "C:\Program Files\JetBrains\PyCharm Community Edition 2019.2.1\\bin\pycharm64.exe")
-    # use \\ because \b does some nasty stuff
     open_bar_app(5)
 
 
@@ -108,6 +121,8 @@ def select_and_search():
 def open_lol():
     #open_app('Garena', 'Garena', "C:\Program Files (x86)\Garena\Garena\Garena.exe")
     open_bar_app(9)
+    # todo login and select lol for me automatically
+
 
 
 def get_mouse_coords():
