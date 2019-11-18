@@ -18,9 +18,10 @@ hotkeys_to_funcs={frozenset([KeyCode(char='`'), KeyCode(char='b')]): [bookmark_p
                   frozenset([Key.tab, Key.right]): [change_web_tab_to_right],
                   frozenset([KeyCode(char='`'), Key.delete]): [close_all_but_one_new_tab],
                   frozenset([KeyCode(char='`'), KeyCode(char='y')]): [open_youtube],
-                  frozenset([KeyCode(char='`'), KeyCode(char='n')]): [opne_netflix],
+                  frozenset([KeyCode(char='`'), KeyCode(char='n')]): [open_netflix],
                   frozenset([KeyCode(char='`'), KeyCode(char='t')]): [open_ticktick],
-                  frozenset([KeyCode(char="`"), KeyCode(char="x")]): [delete_key_once, psf.close_current_window]
+                  frozenset([KeyCode(char="`"), KeyCode(char="x")]): [delete_key_once, psf.close_current_window],
+                  frozenset([KeyCode(char="`"), KeyCode(char="c")]): [delete_key_once, open_chrome],
                   }
 
 
@@ -32,8 +33,12 @@ def on_press(key):
 
 def on_release(key):
     if frozenset(current_keys) in hotkeys_to_funcs:  # if curtain hotkey is pressed
-        for func in hotkeys_to_funcs[frozenset(current_keys)]:  # execute functions
+        s_time = time.time()
+        # execute functions
+        for func in hotkeys_to_funcs[frozenset(current_keys)]:
             func()
+        time_used = round((time.time() - s_time), 5)
+        print(time_used)
     print('Key {0} released'.format(key))
     current_keys.clear()
 
@@ -44,15 +49,7 @@ def listen():
 
 
 def main():
-
-    while True:  # if chrome is opened, activate the script
-        if "chrome.exe" in (p.name() for p in psutil.process_iter()):
-            print('main loop')
-            listen()
-            #break
-        else:
-            time.sleep(1)
-
+    listen()
 
 if __name__ == '__main__':
     main()

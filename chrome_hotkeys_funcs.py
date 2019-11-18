@@ -71,12 +71,69 @@ def open_youtube():
     pg.click(880, 130)
 
 
-def opne_netflix():
-    click_bookmark(2)
+def open_netflix():
+    click_bookmark(2)  # todo do this with selenium
 
 
 def open_ticktick():
     click_bookmark(4)
 
+
+def open_chrome():
+
+    def kill_all_chrome_processes():
+        import psutil
+        import os
+        import signal
+
+        psutil.process_iter(attrs=None, ad_value=None)
+        processes_list = []
+        for proc in psutil.process_iter():
+            try:
+                # Get process name & pid from process object.
+                processName = proc.name()
+                processID = proc.pid
+                # append them to a list
+                a = []
+                a.append(processName)
+                a.append(processID)
+                processes_list.append(a)
+
+            except (psutil.NoSuchProcess, psutil.AccessDenied, psutil.ZombieProcess):
+                pass
+
+        # kill chrome processes
+        for proc in processes_list:
+            if 'CHROME' in proc[0].upper():
+                os.kill(proc[1], signal.SIGTERM)
+
+    def launch_chrome():
+        try:
+            global driver
+            kill_all_chrome_processes()  # driver will only work if there are no chrome processes for god know reason
+            from selenium import webdriver
+            options = webdriver.ChromeOptions()
+            user_data_dir = 'user-data-dir=C:\\Users\\manyi\\AppData\\Local\\Google\\Chrome\\User Data'
+            options.add_argument(user_data_dir)
+            driver = webdriver.Chrome(executable_path='D:\\文件\\chromedriver_win32\\chromedriver.exe', options=options)
+            # todo fix this won't work if there are chrome tasks (look in task manager)
+        except Exception as e:
+            print(e)
+        finally:
+            global chrome_opened, chrome_handle
+            chrome_opened = True
+            chrome_handle = (win32gui.GetForegroundWindow())
+            print('launched chrome')
+
+    def main_func():
+        try:
+            if chrome_opened:
+                open_taskbar_app(4)  # switch to chrome
+                print('switched to chrome')
+        except Exception as e:
+            print(e)
+            launch_chrome()  # open chrome if chrome isn't opened
+
+    main_func()
 
 

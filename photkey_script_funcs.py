@@ -67,36 +67,17 @@ def open_app(app_exe_file, app_name, app_path):
 def close_current_window():
     handle = (win32gui.GetForegroundWindow())  # handle is the process of current window
     win32gui.PostMessage(handle, win32con.WM_CLOSE, 0, 0)
-
-
-def open_chrome():
-
-    def launch_chrome():
-        try:
-            from selenium import webdriver
-            options = webdriver.ChromeOptions()
-            user_data_dir = 'user-data-dir=C:\\Users\\manyi\\AppData\\Local\\Google\\Chrome\\User Data'
-            options.add_argument(user_data_dir)
-            driver = webdriver.Chrome(executable_path='D:\文件\chromedriver_win32\chromedriver.exe', options=options)
-
-        except Exception as e:
-            pass
-        finally:
-            global chrome_opened
-            chrome_opened = True
-
+    # for open_chrome func
     try:
-        if chrome_opened:
-            open_bar_app(3)  # switch to chrome
+        if handle == chrome_handle:
+            global chrome_opened
+            del chrome_opened
     except Exception as e:
         print(e)
-        launch_chrome()  # open chrome if chrome isn't opened
-
-
 
 
 def open_pycharm():
-    open_bar_app(5)
+    open_taskbar_app(5)
 
 
 def delete_key_once():
@@ -119,10 +100,8 @@ def select_and_search():
 
 
 def open_lol():
-    #open_app('Garena', 'Garena', "C:\Program Files (x86)\Garena\Garena\Garena.exe")
-    open_bar_app(9)
+    open_taskbar_app(9)
     # todo login and select lol for me automatically
-
 
 
 def get_mouse_coords():
@@ -134,20 +113,14 @@ def get_mouse_coords():
 
 
 def open_anki():
-    #open_app("anki.exe", 'anki', "C:\Program Files\Anki\\anki.exe")
-    open_bar_app(8)
+    open_taskbar_app(8)
 
-def open_bar_app(num, multipage = False):
+
+def open_taskbar_app(num, multipage = False):
     s_time = time.time()
 
     # todo if current app is the app, don't switch
-    pg.hotkey('esc')
-    x,y = pg.position()
-    pg.click(420+(num-1)*47, 1070)
-    if multipage:  # if there are more than one app of its self
-        time.sleep(0.02)
-        pg.click(420+(num-1)*47, 1020)
-    pg.moveTo(x,y)
+    pg.hotkey('winleft', str(num-1))
 
     time_used = round((time.time()- s_time), 5)
     print('-'*40,"\nUsed {0} second to finish process".format(time_used))
