@@ -100,7 +100,7 @@ def select_and_search():
 
 
 def open_lol():
-    open_taskbar_app(9)
+    open_taskbar_app(8)
     # todo login and select lol for me automatically
 
 
@@ -113,15 +113,18 @@ def get_mouse_coords():
 
 
 def open_anki():
-    open_taskbar_app(8)
+    open_taskbar_app(9)
 
 
 def open_taskbar_app(num, multipage = False):
-    s_time = time.time()
-
     # todo if current app is the app, don't switch
     pg.hotkey('winleft', str(num-1))
 
-    time_used = round((time.time()- s_time), 5)
-    print('-'*40,"\nUsed {0} second to finish process".format(time_used))
+
+def lol_get_top():
+    pg.click(500,860)
+    time.sleep(0.01)
+    pg.typewrite('top')
+    time.sleep(0.01)
+    pg.hotkey('enter')
 

@@ -57,7 +57,7 @@ def change_web_tab_to_right():
 def close_all_but_one_new_tab():
     pg.hotkey('ctrl', 't')
     pg.click(40,10, button='right')
-    pg.click(135,190)
+    pg.click(135,190)  # close tabs that are on the right of the first tab
     pg.hotkey('ctrl','t')
     pg.hotkey('ctrl', 'shift', 'tab')
     pg.hotkey('ctrl', 'w')
@@ -80,6 +80,10 @@ def open_ticktick():
 
 
 def open_chrome():
+    open_taskbar_app(4)
+
+
+def open_chrome_by_selenium():
 
     def kill_all_chrome_processes():
         import psutil
@@ -116,7 +120,6 @@ def open_chrome():
             user_data_dir = 'user-data-dir=C:\\Users\\manyi\\AppData\\Local\\Google\\Chrome\\User Data'
             options.add_argument(user_data_dir)
             driver = webdriver.Chrome(executable_path='D:\\文件\\chromedriver_win32\\chromedriver.exe', options=options)
-            # todo fix this won't work if there are chrome tasks (look in task manager)
         except Exception as e:
             print(e)
         finally:

@@ -32,14 +32,17 @@ def on_press(key):
 
 
 def on_release(key):
-    if frozenset(current_keys) in hotkeys_to_funcs:  # if curtain hotkey is pressed
-        s_time = time.time()
+    s_time = time.time()
+    # if curtain hotkey is pressed
+    if frozenset(current_keys) in hotkeys_to_funcs:
+        print('-' * 120)
         # execute functions
         for func in hotkeys_to_funcs[frozenset(current_keys)]:
             func()
         time_used = round((time.time() - s_time), 5)
-        print(time_used)
-    print('Key {0} released'.format(key))
+        # give information
+        print('{0} second used to \nexecute {1}'.format(time_used, (hotkeys_to_funcs[frozenset(current_keys)])))
+        print('\n'+'-' * 120)
     current_keys.clear()
 
 
