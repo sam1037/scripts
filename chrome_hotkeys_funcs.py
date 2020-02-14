@@ -55,12 +55,16 @@ def change_web_tab_to_right():
 
 
 def close_all_but_one_new_tab():
-    pg.hotkey('ctrl', 't')
     pg.click(40,10, button='right')
+    time.sleep(0.1)
     pg.click(135,190)  # close tabs that are on the right of the first tab
+    time.sleep(0.5)
     pg.hotkey('ctrl','t')
+    time.sleep(0.1)
     pg.hotkey('ctrl', 'shift', 'tab')
+    time.sleep(0.1)
     pg.hotkey('ctrl', 'w')
+    time.sleep(0.1)
     pg.hotkey('esc')
 
 
@@ -73,6 +77,8 @@ def open_youtube():
 
 def open_netflix():
     click_bookmark(2)  # todo do this with selenium
+    time.sleep(5)
+    pg.click(1214,509)
 
 
 def open_ticktick():
