@@ -13,15 +13,32 @@ ctypes.windll.kernel32.SetConsoleTitleW("Chrome_hotkey")  # change cmd name
 current_keys = set()
 
 
-hotkeys_to_funcs={frozenset([KeyCode(char='`'), KeyCode(char='b')]): [bookmark_process],
-                  frozenset([Key.tab, Key.left]): [change_web_tab_to_left],
-                  frozenset([Key.tab, Key.right]): [change_web_tab_to_right],
-                  frozenset([KeyCode(char='`'), Key.delete]): [close_all_but_one_new_tab],
-                  frozenset([KeyCode(char='`'), KeyCode(char='y')]): [open_youtube],
-                  frozenset([KeyCode(char='`'), KeyCode(char='n')]): [open_netflix],
-                  frozenset([KeyCode(char='`'), KeyCode(char='t')]): [open_ticktick],
-                  frozenset([KeyCode(char="`"), KeyCode(char="x")]): [delete_key_once, psf.close_current_window],
-                  frozenset([KeyCode(char="`"), KeyCode(char="c")]): [delete_key_once, open_chrome],
+hotkeys_to_funcs={frozenset([KeyCode(char='`'), KeyCode(char='b')]):
+                      [bookmark_process],
+                  frozenset([Key.tab, Key.left]):
+                      [change_web_tab_to_left],
+                  frozenset([Key.tab, Key.right]):
+                      [change_web_tab_to_right],
+                  frozenset([KeyCode(char='`'), Key.delete]):
+                      [close_all_but_one_new_tab],
+                  frozenset([KeyCode(char='`'), KeyCode(char='y')]):
+                      [youtube.open],
+                  frozenset([KeyCode(char='`'), KeyCode(char="1"),KeyCode(char='y')]):
+                      [youtube.open_in_new],
+                  frozenset([KeyCode(char='`'), KeyCode(char='t')]):
+                      [ticktick.open],
+                    frozenset([KeyCode(char='`'), KeyCode(char='1'),KeyCode(char='t')]):
+                      [ticktick.open_in_new],
+                  frozenset([KeyCode(char="`"), KeyCode(char="x")]):
+                      [delete_key_once, psf.close_current_window],
+                  frozenset([KeyCode(char="`"), KeyCode(char="o")]):
+                      [delete_key_once, teams.open],
+                  frozenset([KeyCode(char="`"), KeyCode(char="1"),KeyCode(char="o")]):
+                      [delete_key_once, teams.open_in_new],
+                  frozenset([KeyCode(char="`"), KeyCode(char="l")]):
+                      [delete_key_once, leetcode.open],
+                  frozenset([KeyCode(char="`"), KeyCode(char="1"), KeyCode(char="l")]):
+                      [delete_key_once, leetcode.open_in_new],
                   }
 
 
@@ -53,6 +70,7 @@ def listen():
 
 def main():
     listen()
+
 
 if __name__ == '__main__':
     main()

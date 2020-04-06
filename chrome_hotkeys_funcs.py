@@ -1,5 +1,25 @@
 from photkey_script_funcs import *
 from pynput.keyboard import Key, Listener
+import pyautogui as pg
+from photkey_script_funcs import chrome
+
+
+class Website:
+    def __init__(self, bookmark, func=None):
+        self.bookmark = bookmark
+        self.func = func
+
+    def open(self):
+        if self.bookmark is None:
+            return
+        click_bookmark(self.bookmark)
+        if self.func is not None:
+            self.func()
+
+    def open_in_new(self):
+        pg.hotkey('ctrl', 't')
+        time.sleep(0.1)
+        self.open()
 
 
 def click_bookmark(num):  # todo fix not working in not full screen
@@ -55,9 +75,9 @@ def change_web_tab_to_right():
 
 
 def close_all_but_one_new_tab():
-    pg.click(40,10, button='right')
+    pg.click(103,15, button='right')
     time.sleep(0.1)
-    pg.click(135,190)  # close tabs that are on the right of the first tab
+    pg.click(206,247)  # close tabs that are on the right of the first tab
     time.sleep(0.5)
     pg.hotkey('ctrl','t')
     time.sleep(0.1)
@@ -68,26 +88,17 @@ def close_all_but_one_new_tab():
     pg.hotkey('esc')
 
 
-def open_youtube():
+def yt_func():
     # todo if website already exist, switch to it istead of bring a new one
-    click_bookmark(1)
     time.sleep(1)
     pg.click(880, 130)
 
 
-def open_netflix():
-    click_bookmark(2)  # todo do this with selenium
-    time.sleep(5)
-    pg.click(1214,509)
-
-
-def open_ticktick():
-    click_bookmark(4)
-
-
-def open_chrome():
-    open_taskbar_app(4)
-
+def ticktick_func():
+    pos = pg.position()
+    time.sleep(3)
+    pg.click(117, 293)
+    pg.moveTo(pos)
 
 def open_chrome_by_selenium():
 
@@ -137,12 +148,23 @@ def open_chrome_by_selenium():
     def main_func():
         try:
             if chrome_opened:
-                open_taskbar_app(4)  # switch to chrome
+                chrome.open()  # switch to chrome
                 print('switched to chrome')
         except Exception as e:
             print(e)
             launch_chrome()  # open chrome if chrome isn't opened
 
     main_func()
+
+
+youtube = Website(1, yt_func)
+ticktick = Website(4, ticktick_func)
+teams = Website(7)
+leetcode = Website(8)
+
+
+
+
+
 
 

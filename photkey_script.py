@@ -19,10 +19,12 @@ current_keys = set()
 
 hotkeys_to_funcs = {  # list of hotkey and its particular function
     frozenset([KeyCode(char="`"), KeyCode(char="x")]): [delete_key_once, close_current_window],
-    frozenset([KeyCode(char="`"), KeyCode(char="p")]): [delete_key_once, open_pycharm],
+    frozenset([KeyCode(char="`"), KeyCode(char="p")]): [delete_key_once, pycharm.open],
     frozenset([KeyCode(char="`"), KeyCode(char="g")]): [select_and_search],
-    frozenset([KeyCode(char="`"), KeyCode(char="l")]): [delete_key_once, open_lol],
-    frozenset([KeyCode(char="`"), KeyCode(char="a")]): [delete_key_once, open_anki],
+    frozenset([KeyCode(char="`"), KeyCode(char="a")]): [delete_key_once, anki.open],
+    frozenset([KeyCode(char="`"), KeyCode(char="v")]): [delete_key_once, vscode.open],
+    frozenset([KeyCode(char="`"), KeyCode(char="n")]): [delete_key_once, netflix.open],
+    frozenset([KeyCode(char="`"), KeyCode(char="c")]): [delete_key_once, chrome.open],
     # todo create more hotkeys:
 
 
@@ -47,6 +49,7 @@ def on_release(key):
         print('{0} second used to \nexecute {1}'.format(time_used, (hotkeys_to_funcs[frozenset(current_keys)])))
         print('\n'+'-'*120)
     current_keys.clear()
+
 
 def main():
     with keyboard.Listener(on_press=on_press, on_release=on_release) as kl:

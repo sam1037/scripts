@@ -1,5 +1,4 @@
 """
-TIL home key can bring me to the start of the line
 """
 import time
 
@@ -76,10 +75,6 @@ def close_current_window():
         print(e)
 
 
-def open_pycharm():
-    open_taskbar_app(5)
-
-
 def delete_key_once():
     delete_key(1)
 
@@ -98,12 +93,6 @@ def select_and_search():
     pg.hotkey('ctrl','v')
     pg.hotkey('enter')
 
-
-def open_lol():
-    open_taskbar_app(8)
-    # todo login and select lol for me automatically
-
-
 def get_mouse_coords():
     import win32api
     while True:
@@ -111,20 +100,38 @@ def get_mouse_coords():
         x, y = win32api.GetCursorPos()
         print(x,y)
 
-
-def open_anki():
-    open_taskbar_app(9)
-
-
-def open_taskbar_app(num, multipage = False):
-    # todo if current app is the app, don't switch
-    pg.hotkey('winleft', str(num-1))
-
-
 def lol_get_top():
     pg.click(500,860)
     time.sleep(0.01)
     pg.typewrite('top')
     time.sleep(0.01)
     pg.hotkey('enter')
+
+class App():
+    def __init__(self, barnum):
+        self._barnum = barnum
+        # the barnum of file_explorer is 1, mc is 2
+
+    def open(self):
+        # todo if current app is the app, don't switch
+        if self._barnum == 10:
+            num = 0
+        else:
+            num = self._barnum
+
+        if self._barnum < 11:
+            pg.hotkey('winleft', str(num))
+        else:
+            pos = pg.position()
+            pg.click((410 + num * 48), 1050)
+            pg.moveTo(pos[0], pos[1])
+
+
+netflix = App(8)
+anki = App(6)
+file_explorer = App(7)
+chrome = App(3)
+vscode = App(10)
+pycharm = App(5)
+lol = App(9)
 
