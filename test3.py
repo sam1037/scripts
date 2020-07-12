@@ -19,7 +19,12 @@ def listen():
     with keyboard.Listener(on_press=on_press, on_release=on_release) as k:
         k.join()
 
-import pyautogui
-import time
-time.sleep(3)
-pyautogui.press("backspace")
+def get_path(func):  
+     if type(func).__name__ == 'function' : 
+         return func.__code__.co_filename
+     else: 
+         raise ValueError("'func' must be a function") 
+
+
+a = get_path(deleteKeyOnce)
+print(a)

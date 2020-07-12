@@ -1,8 +1,6 @@
 """
 """
 import time
-
-import psutil
 import pyautogui as pg
 import win32con
 import win32gui
