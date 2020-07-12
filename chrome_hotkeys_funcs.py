@@ -2,6 +2,8 @@ from photkey_script_funcs import *
 from pynput.keyboard import Key, Listener
 import pyautogui as pg
 from photkey_script_funcs import chrome
+from PIL import ImageGrab
+import math
 
 
 class Website:
@@ -75,9 +77,9 @@ def change_web_tab_to_right():
 
 
 def close_all_but_one_new_tab():
-    pg.click(103,15, button='right')
+    pg.click(11,17, button='right')
     time.sleep(0.1)
-    pg.click(206,247)  # close tabs that are on the right of the first tab
+    pg.click(38,238)  # close tabs that are on the right of the first tab
     time.sleep(0.5)
     pg.hotkey('ctrl','t')
     time.sleep(0.1)
@@ -86,6 +88,27 @@ def close_all_but_one_new_tab():
     pg.hotkey('ctrl', 'w')
     time.sleep(0.1)
     pg.hotkey('esc')
+
+
+def close_other_tabs():
+    #get position of current tab
+    def get_coord():
+
+        coord_list = [(x,0) for x in range(0,1704)] 
+        screen = ImageGrab.grab()
+
+        for coord in coord_list:
+            if screen.getpixel(coord) == (255,255,255):
+                return coord
+                break
+            
+        return coord
+    x,y = get_coord()
+
+    #do the remaining
+    pg.click(x,y, button='right')
+    time.sleep(0.05)
+    pg.click(x+15,y+186)  # close other tabs
 
 
 def yt_func():
@@ -136,7 +159,7 @@ def open_chrome_by_selenium():
             options = webdriver.ChromeOptions()
             user_data_dir = 'user-data-dir=C:\\Users\\manyi\\AppData\\Local\\Google\\Chrome\\User Data'
             options.add_argument(user_data_dir)
-            driver = webdriver.Chrome(executable_path='D:\\文件\\chromedriver_win32\\chromedriver.exe', options=options)
+            driver = webdriver.Chrome(executable_path='C:\\chromedriver\\chromedriver.exe', options=options)
         except Exception as e:
             print(e)
         finally:
@@ -159,7 +182,6 @@ def open_chrome_by_selenium():
 
 youtube = Website(1, yt_func)
 ticktick = Website(4, ticktick_func)
-teams = Website(7)
 leetcode = Website(8)
 
 

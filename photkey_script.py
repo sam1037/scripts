@@ -25,6 +25,8 @@ hotkeys_to_funcs = {  # list of hotkey and its particular function
     frozenset([KeyCode(char="`"), KeyCode(char="v")]): [delete_key_once, vscode.open],
     frozenset([KeyCode(char="`"), KeyCode(char="n")]): [delete_key_once, netflix.open],
     frozenset([KeyCode(char="`"), KeyCode(char="c")]): [delete_key_once, chrome.open],
+    frozenset([KeyCode(char="`"), KeyCode(char="o")]): [delete_key_once, teams.open],
+    frozenset([KeyCode(char="`"), KeyCode(char="k")]): [delete_key_once, kill_window_activate_notice]
     # todo create more hotkeys:
 
 
@@ -52,6 +54,7 @@ def on_release(key):
 
 
 def main():
+    kill_window_activate_notice()
     with keyboard.Listener(on_press=on_press, on_release=on_release) as kl:
         kl.join()
 

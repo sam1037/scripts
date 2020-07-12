@@ -1,0 +1,8 @@
+[0415/000308.689:ERROR:process_reader_win.cc(123)] NtOpenThread: {拒絕存取} 程序已請求存取一物件，但未被授與存取權。 (0xc0000022)
+[0415/000308.689:ERROR:exception_snapshot_win.cc(98)] thread ID 10860 not found in process
+[0415/000308.708:ERROR:process_info.cc(329)] VirtualQueryEx: 存取被拒。 (0x5)
+[0415/000308.708:ERROR:process_info.cc(556)] ReadMemoryInfo failed
+[0415/000308.708:ERROR:process_memory_win.cc(39)] Failed to initialize ProcessInfo.
+[0415/000308.708:ERROR:scoped_process_suspend.cc(40)] NtResumeProcess: 嘗試存取現有的處理程序。 (0xc000010a)
+[0517/163032.121:ERROR:process_reader_win.cc(123)] NtOpenThread: {拒絕存取} 程序已請求存取一物件，但未被授與存取權。 (0xc0000022)
+[0517/163032.122:ERROR:exception_snapshot_win.cc(98)] thread ID 6628 not found in process

@@ -21,6 +21,8 @@ hotkeys_to_funcs={frozenset([KeyCode(char='`'), KeyCode(char='b')]):
                       [change_web_tab_to_right],
                   frozenset([KeyCode(char='`'), Key.delete]):
                       [close_all_but_one_new_tab],
+                  frozenset([KeyCode(char='`'), KeyCode(char="1"), Key.delete]):
+                      [close_other_tabs],
                   frozenset([KeyCode(char='`'), KeyCode(char='y')]):
                       [youtube.open],
                   frozenset([KeyCode(char='`'), KeyCode(char="1"),KeyCode(char='y')]):
@@ -31,10 +33,6 @@ hotkeys_to_funcs={frozenset([KeyCode(char='`'), KeyCode(char='b')]):
                       [ticktick.open_in_new],
                   frozenset([KeyCode(char="`"), KeyCode(char="x")]):
                       [delete_key_once, psf.close_current_window],
-                  frozenset([KeyCode(char="`"), KeyCode(char="o")]):
-                      [delete_key_once, teams.open],
-                  frozenset([KeyCode(char="`"), KeyCode(char="1"),KeyCode(char="o")]):
-                      [delete_key_once, teams.open_in_new],
                   frozenset([KeyCode(char="`"), KeyCode(char="l")]):
                       [delete_key_once, leetcode.open],
                   frozenset([KeyCode(char="`"), KeyCode(char="1"), KeyCode(char="l")]):
